@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- DRAFT: asks search engines not to list this page. Remove when the real site launches. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Dune.it – Pienet työt, lähellä</title>
+<meta name="description" content="Dune.it yhdistää nuoret tekijät ja naapurit, jotka tarvitsevat apua arjen töihin. Tulossa Seinäjoelle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ===== Colours: the same "Sauna sunset" palette as the app (app/src/constants/theme.ts) ===== */
+  :root {
+    --text: #2B1A14;
+    --text-2: #7A5A4E;
+    --bg: #FFF8F4;
+    --bg-soft: #FAECE7;
+    --line: #F5C4B3;
+    --card: #FFFFFF;
+    --coral: #D85A30;
+    --coral-text: #993C1D;
+    --on-coral: #FFFFFF;
+    --shadow: 0 10px 30px rgba(153, 60, 29, 0.12);
+    --radius: 22px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #FFF1EA;
+      --text-2: #C9AEA3;
+      --bg: #1A1210;
+      --bg-soft: #2A1D18;
+      --line: #4A2A1F;
+      --card: #251915;
+      --coral: #E8724A;
+      --coral-text: #F0997B;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  /* ===== Language switch: show only the chosen language ===== */
+  html[lang="fi"] .en, html[lang="en"] .fi { display: none !important; }
+
+  /* ===== Basics ===== */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Nunito", system-ui, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 17px;
+  }
+  h1, h2, h3 { line-height: 1.15; margin: 0 0 0.5em; font-weight: 900; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(2.3rem, 6vw, 3.8rem); }
+  h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
+  h3 { font-size: 1.2rem; font-weight: 800; }
+  p { margin: 0 0 1em; }
+  a { color: var(--coral-text); }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  section { padding: 44px 0; }
+  @media (max-width: 760px) { section { padding: 32px 0; } }
+  .eyebrow { color: var(--coral-text); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; margin-bottom: 0.6em; }
+  .lead { font-size: 1.15rem; color: var(--text-2); max-width: 36em; }
+
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-block; padding: 14px 24px; border-radius: 999px;
+    font: inherit; font-weight: 800; text-decoration: none; border: 0; cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: var(--coral); color: var(--on-coral); box-shadow: 0 8px 20px rgba(216, 90, 48, 0.35); }
+  .btn-ghost { background: var(--card); color: var(--text); box-shadow: var(--shadow); }
+
+  /* ===== Header ===== */
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 68px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.35rem; color: var(--text); text-decoration: none; }
+  .logo-mark { width: 38px; height: 38px; border-radius: 11px; background: var(--coral); color: #fff; display: grid; place-items: center; font-size: 1.3rem; }
+  .nav-links { display: flex; align-items: center; gap: 22px; }
+  .nav-links a { color: var(--text); text-decoration: none; font-weight: 700; }
+  .nav-links a:hover { color: var(--coral-text); }
+  .lang { display: flex; background: var(--bg-soft); border-radius: 999px; padding: 3px; }
+  .lang button { border: 0; background: none; font: inherit; font-weight: 800; font-size: 0.85rem; padding: 6px 11px; border-radius: 999px; color: var(--text-2); cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--card); color: var(--text); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  @media (max-width: 760px) { .nav-links a { display: none; } }
+
+  /* ===== Hero ===== */
+  .hero { padding: 32px 0 44px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-soft); color: var(--coral-text); font-weight: 800; padding: 7px 14px; border-radius: 999px; font-size: 0.9rem; margin-bottom: 20px; }
+  .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+  .hero h1 span.hl { color: var(--coral); }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .hero .phone { width: 250px; aspect-ratio: 9 / 15; } }
+
+  /* Phone drawing (made with CSS, shows what the app looks like) */
+  .phone {
+    width: min(300px, 100%); margin: 0 auto; aspect-ratio: 9 / 16.5;
+    background: var(--bg); border: 10px solid #2B1A14; border-radius: 44px;
+    box-shadow: 0 30px 60px rgba(153, 60, 29, 0.25); overflow: hidden; position: relative;
+    transform: rotate(3deg);
+  }
+  .phone-top { background: var(--coral); color: #fff; padding: 34px 16px 18px; }
+  .phone-top small { opacity: 0.85; font-weight: 700; }
+  .phone-top b { display: block; font-size: 1.2rem; font-weight: 900; line-height: 1.2; margin-top: 2px; }
+  .phone-search { margin-top: 12px; background: rgba(255,255,255,0.95); color: #7A5A4E; border-radius: 12px; padding: 8px 12px; font-size: 0.8rem; font-weight: 700; }
+  .phone-body { padding: 12px; display: grid; gap: 10px; }
+  .task { background: var(--card); border-radius: 14px; padding: 10px; display: flex; gap: 10px; align-items: center; box-shadow: 0 4px 12px rgba(153, 60, 29, 0.1); }
+  .task-icon { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; flex: none; }
+  .task-icon svg { width: 22px; height: 22px; }
+  .task b { display: block; font-size: 0.85rem; line-height: 1.2; }
+  .task small { color: var(--text-2); font-size: 0.72rem; font-weight: 700; }
+  .task .price { margin-left: auto; font-weight: 900; color: var(--coral-text); font-size: 0.9rem; white-space: nowrap; }
+  @media (prefers-color-scheme: dark) { .phone { border-color: #4A2A1F; } }
+
+  /* ===== How it works ===== */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; counter-reset: step; }
+  .step { background: var(--card); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+  .step::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-soft); color: var(--coral-text); font-weight: 900; margin-bottom: 14px; }
+  .step p { color: var(--text-2); margin: 0; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+
+  /* ===== Two audiences ===== */
+  .audiences { background: var(--bg-soft); }
+  .aud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .aud { background: var(--card); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); }
+  .aud.worker { background: var(--coral); color: #fff; }
+  .aud.worker .eyebrow { color: #FFE3D8; }
+  .aud ul { padding: 0; margin: 18px 0 26px; list-style: none; display: grid; gap: 10px; }
+  .aud li { padding-left: 30px; position: relative; font-weight: 600; }
+  .aud li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 21px; height: 21px; border-radius: 50%; display: grid; place-items: center; font-size: 0.75rem; font-weight: 900; background: var(--bg-soft); color: var(--coral-text); }
+  .aud.worker li::before { background: rgba(255,255,255,0.22); color: #fff; }
+  .aud.worker .btn { background: #fff; color: #993C1D; }
+  @media (max-width: 760px) { .aud-grid { grid-template-columns: 1fr; } }
+
+  /* ===== Task types ===== */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .chip { background: var(--card); border: 2px solid var(--line); border-radius: 999px; padding: 9px 16px; font-weight: 700; }
+
+  /* ===== Trust ===== */
+  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 20px; }
+  .trust-grid div { border-top: 3px solid var(--coral); padding-top: 14px; }
+  .trust-grid p { color: var(--text-2); margin: 0; font-size: 0.95rem; }
+  @media (max-width: 860px) { .trust-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .trust-grid { grid-template-columns: 1fr; } }
+
+  /* ===== Waiting list ===== */
+  .signup { background: var(--coral); color: #fff; border-radius: 32px; padding: 48px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+  .signup p { color: #FFE3D8; }
+  .form { background: var(--card); color: var(--text); border-radius: var(--radius); padding: 24px; display: grid; gap: 12px; }
+  .form label { font-weight: 800; font-size: 0.9rem; display: grid; gap: 6px; }
+  .form input { font: inherit; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); color: var(--text); }
+  .form input:focus { outline: none; border-color: var(--coral); }
+  .choice { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .choice label { display: flex; align-items: center; gap: 8px; border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; cursor: pointer; font-weight: 700; }
+  .choice input { accent-color: var(--coral); }
+  .form small { color: var(--text-2); font-size: 0.8rem; }
+  .form-done { display: none; font-weight: 800; color: var(--coral-text); }
+  @media (max-width: 860px) { .signup { grid-template-columns: 1fr; padding: 32px 20px; } }
+
+  /* ===== Intro: plays once (2-3 s) when the page opens, then fades away ===== */
+  .intro { position: fixed; inset: 0; z-index: 100; background: #D85A30; color: #fff; display: grid; place-items: center; overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s; }
+  .intro.done { opacity: 0; visibility: hidden; }
+  html.intro-on, html.intro-on body { overflow: hidden; } /* no scrolling while the intro plays */
+  .intro video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+  .intro.has-video video { display: block; }
+  .intro.has-video .intro-placeholder { display: none; }
+  /* Placeholder animation, used until the Higgsfield video exists (or if it fails to load) */
+  .intro-placeholder { text-align: center; }
+  .intro-logo { display: inline-grid; place-items: center; width: 96px; height: 96px; border-radius: 28px; background: #fff; color: #D85A30; font-weight: 900; font-size: 2.6rem; animation: pop 0.7s cubic-bezier(.3,1.6,.5,1) both; }
+  .intro-name { font-weight: 900; font-size: 2.4rem; margin-top: 14px; animation: rise 0.5s 0.5s ease-out both; }
+  .intro-tag { font-weight: 700; opacity: 0.9; animation: rise 0.5s 0.9s ease-out both; }
+  @keyframes pop { from { transform: scale(0.3) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes rise { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .intro-skip { position: absolute; right: 16px; bottom: 20px; background: rgba(255,255,255,0.2); color: #fff; border: 0; border-radius: 999px; padding: 8px 16px; font: inherit; font-weight: 800; font-size: 0.85rem; cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { .intro { display: none; } }
+
+  /* ===== Footer ===== */
+  footer { padding: 28px 0 40px; color: var(--text-2); font-size: 0.9rem; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 24px; }
+</style>
+</head>
+<body>
+
+<!-- ===== INTRO: a 2-3 second opening animation, shown once per visit =====
+     To use the Higgsfield video, put two files in this folder:
+       intro.mp4         (wide, 16:9, for computers)
+       intro-mobile.mp4  (tall, 9:16, for phones)
+     If they're missing, the coral placeholder animation below plays instead.
+     To see the intro again while testing, add ?intro to the address. -->
+<div class="intro" id="intro" aria-hidden="true">
+  <video id="intro-video" muted playsinline preload="auto"></video>
+  <div class="intro-placeholder">
+    <div class="intro-logo">D.</div>
+    <div class="intro-name">Dune.it</div>
+    <div class="intro-tag"><span class="fi">Pienet työt, lähellä.</span><span class="en">Small jobs, close by.</span></div>
+  </div>
+  <button class="intro-skip" type="button"><span class="fi">Ohita</span><span class="en">Skip</span></button>
+</div>
+<script>
+  (function () {
+    var intro = document.getElementById('intro');
+    var forced = location.search.indexOf('intro') !== -1;
+    var seen = false;
+    try { seen = sessionStorage.getItem('introSeen') === '1'; } catch (e) {}
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if ((seen && !forced) || reduce) { intro.remove(); return; }
+
+    document.documentElement.classList.add('intro-on');
+    var start = Date.now();
+    var finished = false;
+    function finish() {
+      if (finished) return;
+      finished = true;
+      intro.classList.add('done');
+      document.documentElement.classList.remove('intro-on');
+      try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+      setTimeout(function () { intro.remove(); }, 600);
+    }
+
+    // Placeholder length: 2.4 s. A hard limit means the page can never get stuck behind the intro.
+    var timer = setTimeout(finish, 2400);
+
+    // Use the real video if it loads quickly; otherwise keep the placeholder.
+    var video = document.getElementById('intro-video');
+    video.addEventListener('canplay', function () {
+      if (finished || Date.now() - start > 800) return;
+      clearTimeout(timer);
+      intro.classList.add('has-video');
+      video.play().catch(finish);
+      timer = setTimeout(finish, 3500);
+    }, { once: true });
+    video.addEventListener('ended', finish);
+    video.src = window.innerWidth < 700 ? 'intro-mobile.mp4' : 'intro.mp4';
+
+    // Any tap, scroll, key press or the Skip button ends the intro at once.
+    intro.querySelector('.intro-skip').addEventListener('click', finish);
+    ['wheel', 'touchmove', 'keydown'].forEach(function (ev) {
+      window.addEventListener(ev, finish, { once: true, passive: true });
+    });
+    intro.addEventListener('click', finish);
+  })();
+</script>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span class="logo-mark">D.</span>Dune.it</a>
+    <nav class="nav-links">
+      <a href="#miten"><span class="fi">Miten se toimii</span><span class="en">How it works</span></a>
+      <a href="#tekijat"><span class="fi">Tekijöille</span><span class="en">For workers</span></a>
+      <a href="#lista"><span class="fi">Odotuslista</span><span class="en">Waiting list</span></a>
+      <div class="lang" role="group" aria-label="Kieli / Language">
+        <button type="button" data-lang="fi" aria-pressed="true">FI</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ===== HERO: the first thing people see ===== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="badge"><span class="fi">Tulossa Seinäjoelle 2027</span><span class="en">Coming to Seinäjoki in 2027</span></div>
+      <h1>
+        <span class="fi">Pienet työt, <span class="hl">lähellä.</span></span>
+        <span class="en">Small jobs, <span class="hl">close by.</span></span>
+      </h1>
+      <p class="lead">
+        <span class="fi">Dune.it yhdistää nuoret tekijät ja naapurit, jotka tarvitsevat apua arjen töihin. Nurmikko, lumityöt, muutto, tietokone: julkaise tehtävä tai tienaa omalla alueellasi.</span>
+        <span class="en">Dune.it connects young workers with neighbours who need a hand with everyday jobs. Lawn, snow, moving, tech help: post a task or earn money in your own area.</span>
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#lista" data-role="worker"><span class="fi">Haluan tehdä töitä</span><span class="en">I want to work</span></a>
+        <a class="btn btn-ghost" href="#lista" data-role="customer"><span class="fi">Tarvitsen apua</span><span class="en">I need help</span></a>
+      </div>
+    </div>
+
+    <div class="phone" aria-hidden="true">
+      <div class="phone-top">
+        <small><span class="fi">Hei Aino!</span><span class="en">Hi Aino!</span></small>
+        <b><span class="fi">Mitä tehdään tänään?</span><span class="en">What needs doing today?</span></b>
+        <div class="phone-search"><span class="fi">Hae tehtäviä läheltä…</span><span class="en">Search tasks nearby…</span></div>
+      </div>
+      <div class="phone-body">
+        <div class="task">
+          <div class="task-icon" style="background:#E3F1DF;color:#2E7D32"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 16-9 0 12-4 16-9 16z"/><path d="M4 20c4-4 7-6 10-7"/></svg></div>
+          <div><b><span class="fi">Nurmikon leikkuu</span><span class="en">Mow the lawn</span></b><small>0,8 km · <span class="fi">la</span><span class="en">Sat</span></small></div>
+          <span class="price">25 €</span>
+        </div>
+        <div class="task">
+          <div class="task-icon" style="background:#E2EEF8;color:#2B6CB0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/></svg></div>
+          <div><b><span class="fi">Lumityöt pihalla</span><span class="en">Shovel the yard</span></b><small>1,2 km · <span class="fi">tänään</span><span class="en">today</span></small></div>
+          <span class="price">30 €</span>
+        </div>
+        <div class="task">
+          <div class="task-icon" style="background:#EEE6F8;color:#6B46C1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></div>
+          <div><b><span class="fi">Apua tietokoneen kanssa</span><span class="en">Help with a laptop</span></b><small>2,0 km · <span class="fi">ke</span><span class="en">Wed</span></small></div>
+          <span class="price">20 €</span>
+        </div>
+        <div class="task">
+          <div class="task-icon" style="background:#FBE9DF;color:#D85A30"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11H3z"/><path d="M9 20v-6h6v6"/></svg></div>
+          <div><b><span class="fi">Muuttoapu</span><span class="en">Moving help</span></b><small>3,1 km · <span class="fi">pe</span><span class="en">Fri</span></small></div>
+          <span class="price">40 €</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="miten">
+  <div class="wrap">
+    <div class="eyebrow"><span class="fi">Miten se toimii</span><span class="en">How it works</span></div>
+    <h2><span class="fi">Kolme askelta tehtävästä tehdyksi.</span><span class="en">Three steps from task to done.</span></h2>
+    <div class="steps">
+      <div class="step">
+        <h3><span class="fi">Julkaise tehtävä</span><span class="en">Post a task</span></h3>
+        <p><span class="fi">Kerro mitä pitää tehdä, missä ja milloin. Lisää kuva ja hinta-arvio.</span><span class="en">Say what needs doing, where and when. Add a photo and a price.</span></p>
+      </div>
+      <div class="step">
+        <h3><span class="fi">Valitse tekijä</span><span class="en">Pick a helper</span></h3>
+        <p><span class="fi">Lähellä asuvat tekijät lähettävät tarjouksia. Katso profiilit ja arviot.</span><span class="en">People nearby send offers. Check their profiles and ratings.</span></p>
+      </div>
+      <div class="step">
+        <h3><span class="fi">Sovitaan ja tehdään</span><span class="en">Agree and get it done</span></h3>
+        <p><span class="fi">Sovitte yksityiskohdat sovelluksen chatissa. Lopuksi annatte toisillenne arviot.</span><span class="en">Sort out the details in the in-app chat. Afterwards you rate each other.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TWO AUDIENCES ===== -->
+<section class="audiences" id="tekijat">
+  <div class="wrap aud-grid">
+    <div class="aud worker">
+      <div class="eyebrow"><span class="fi">Tekijöille</span><span class="en">For workers</span></div>
+      <h2><span class="fi">Tienaa naapurustossa.</span><span class="en">Earn money in your neighbourhood.</span></h2>
+      <ul>
+        <li><span class="fi">Töitä kävelymatkan päässä, kartalla</span><span class="en">Jobs within walking distance, on a map</span></li>
+        <li><span class="fi">Sinä päätät milloin ja mitä teet</span><span class="en">You choose when and what you do</span></li>
+        <li><span class="fi">Kerää arvioita ja ensimmäiset rivit CV:hen</span><span class="en">Collect ratings and your first CV lines</span></li>
+      </ul>
+      <a class="btn" href="#lista" data-role="worker"><span class="fi">Liity tekijäksi</span><span class="en">Join as a worker</span></a>
+    </div>
+    <div class="aud">
+      <div class="eyebrow"><span class="fi">Apua tarvitseville</span><span class="en">For people who need help</span></div>
+      <h2><span class="fi">Apua naapurista.</span><span class="en">Help from next door.</span></h2>
+      <ul>
+        <li><span class="fi">Kodeille, perheille ja pienyrityksille</span><span class="en">For homes, families and small businesses</span></li>
+        <li><span class="fi">Näet tekijän profiilin ja arviot ennen valintaa</span><span class="en">See the helper's profile and ratings first</span></li>
+        <li><span class="fi">Kaikki viestit samassa paikassa</span><span class="en">All messages in one place</span></li>
+      </ul>
+      <a class="btn btn-primary" href="#lista" data-role="customer"><span class="fi">Ilmoita minulle</span><span class="en">Let me know</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TASK TYPES ===== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><span class="fi">Mitä voi tehdä</span><span class="en">What kind of jobs</span></div>
+    <h2><span class="fi">Pieniä töitä ympäri vuoden.</span><span class="en">Small jobs all year round.</span></h2>
+    <div class="chips">
+      <span class="chip"><span class="fi">Nurmikon leikkuu</span><span class="en">Lawn mowing</span></span>
+      <span class="chip"><span class="fi">Lumityöt</span><span class="en">Snow shovelling</span></span>
+      <span class="chip"><span class="fi">Muuttoapu</span><span class="en">Moving help</span></span>
+      <span class="chip"><span class="fi">Huonekalujen kokoaminen</span><span class="en">Furniture assembly</span></span>
+      <span class="chip"><span class="fi">Koiran ulkoilutus</span><span class="en">Dog walking</span></span>
+      <span class="chip"><span class="fi">Tietotekniikka-apu</span><span class="en">Tech help</span></span>
+      <span class="chip"><span class="fi">Pihatyöt</span><span class="en">Yard work</span></span>
+      <span class="chip"><span class="fi">Siivous</span><span class="en">Cleaning</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST ===== -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow"><span class="fi">Turvallisuus</span><span class="en">Safety</span></div>
+    <h2><span class="fi">Luottamus, jonka näet.</span><span class="en">Trust you can see.</span></h2>
+    <div class="trust-grid">
+      <div><h3><span class="fi">Arviot</span><span class="en">Ratings</span></h3><p><span class="fi">Jokaisen työn jälkeen molemmat antavat arvion.</span><span class="en">Both sides rate each other after every job.</span></p></div>
+      <div><h3><span class="fi">Profiilit</span><span class="en">Profiles</span></h3><p><span class="fi">Näet kenen kanssa olet tekemisissä.</span><span class="en">You can see who you're dealing with.</span></p></div>
+      <div><h3><span class="fi">Chat sovelluksessa</span><span class="en">In-app chat</span></h3><p><span class="fi">Puhelinnumeroa ei tarvitse antaa.</span><span class="en">No need to share your phone number.</span></p></div>
+      <div><h3><span class="fi">Ilmoita ja estä</span><span class="en">Report and block</span></h3><p><span class="fi">Asiaton käytös poistetaan nopeasti.</span><span class="en">Bad behaviour gets removed quickly.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WAITING LIST ===== -->
+<section id="lista" style="padding-top:0">
+  <div class="wrap">
+    <div class="signup">
+      <div>
+        <h2><span class="fi">Ole ensimmäisten joukossa.</span><span class="en">Be one of the first.</span></h2>
+        <p><span class="fi">Dune.it avautuu Seinäjoella vuonna 2027. Liity odotuslistalle, niin kerromme sinulle ensimmäisenä.</span><span class="en">Dune.it opens in Seinäjoki in 2027. Join the waiting list and we'll tell you first.</span></p>
+      </div>
+      <!-- DRAFT: this form doesn't send anything yet. It gets connected to a real sign-up service later. -->
+      <form class="form" id="signup-form">
+        <label><span class="fi">Nimi</span><span class="en">Name</span>
+          <input type="text" name="name" autocomplete="given-name" required>
+        </label>
+        <label><span class="fi">Sähköposti</span><span class="en">Email</span>
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <div class="choice">
+          <label><input type="radio" name="role" value="worker" checked> <span class="fi">Teen töitä</span><span class="en">I'll work</span></label>
+          <label><input type="radio" name="role" value="customer"> <span class="fi">Tarvitsen apua</span><span class="en">I need help</span></label>
+        </div>
+        <button class="btn btn-primary" type="submit"><span class="fi">Liity odotuslistalle</span><span class="en">Join the waiting list</span></button>
+        <small><span class="fi">Käytämme tietojasi vain kertoaksemme avautumisesta. Voit poistua listalta milloin vain.</span><span class="en">We only use your details to tell you when we open. You can leave the list at any time.</span></small>
+        <p class="form-done"><span class="fi">Kiitos! (Luonnos: lomake ei vielä lähetä mitään.)</span><span class="en">Thanks! (Draft: the form doesn't send anything yet.)</span></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap foot">
+    <div><b>Dune.it</b> · Dune Global Oy · Y-tunnus 3530908-3</div>
+    <div><a href="https://renetuuliranta.github.io/duneit-privacy"><span class="fi">Tietosuoja</span><span class="en">Privacy</span></a></div>
+  </div>
+</footer>
+
+<script>
+  // Language switch: FI / EN. Remembers the choice on this device.
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.lang); });
+  });
+  try { var saved = localStorage.getItem('lang'); if (saved) setLang(saved); } catch (e) {}
+
+  // "I want to work" / "I need help" buttons pre-select the matching option in the form.
+  document.querySelectorAll('[data-role]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var r = document.querySelector('input[name="role"][value="' + a.dataset.role + '"]');
+      if (r) r.checked = true;
+    });
+  });
+
+  // Draft form: just shows a thank-you message.
+  document.getElementById('signup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    this.querySelector('.form-done').style.display = 'block';
+  });
+</script>
+</body>
+</html>
